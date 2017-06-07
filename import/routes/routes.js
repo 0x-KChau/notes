@@ -24,7 +24,7 @@ export const authenticatedFunc = (isAuthenticated, history) =>{
               <Route exact path="/" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/login" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/signup" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Signup/>)}/>
-              <Route path="/dashboard" render={()=>(Meteor.userId()?<dashboard/>:<Redirect to={"/login"}/>)}/>
+              <Route path="/dashboard" render={()=>(Meteor.userId()?<Dashboard/>:<Redirect to={"/login"}/>)}/>
               <Route component={NotFound}/>
             </Switch>
           </div>

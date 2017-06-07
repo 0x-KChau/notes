@@ -12,6 +12,7 @@ export class NoteListHeader extends React.Component{
   }
 
   onClick(e){
+    e.preventDefault()
     this.props.meteorCall('notes.insert', (err)=>{
       if(err) throw err;
     })
@@ -20,14 +21,14 @@ export class NoteListHeader extends React.Component{
   render(){
     return(
       <div>
-        <button onClick={this.onClick.binds(this)}>Create Note</button>
+        <button onClick={this.onClick.bind(this)}>Create Note</button>
 
       </div>
     )
   }
 }
 
-NoteListHeader.propTypes={
+NoteListHeader.PropTypes={
   meteorCall:PropTypes.func
 }
 
@@ -36,3 +37,24 @@ export default createContainer(()=>{
     meteorCall:Meteor.call
   }
 }, NoteListHeader)
+
+
+// export const NoteListHeader = (props) =>{
+//   return(
+//     <div>
+//       <button onClick={()=>{
+//         props.meteorCall('notes.insert')
+//       }}>Create Note</button>
+//     </div>
+//   )
+// }
+//
+// NoteListHeader.propTypes={
+//   meteorCall:PropTypes.func
+// }
+//
+// export default createContainer(()=>{
+//   return{
+//     meteorCall : Meteor.call
+//   }
+// },NoteListHeader)

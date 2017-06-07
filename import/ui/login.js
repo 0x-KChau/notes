@@ -52,6 +52,6 @@ Login.propTypes={
 
 export default createContainer(()=>{
   return{
-    loginWithPassword: Meteor.loginWithPassword()
+    loginWithPassword: Meteor.loginWithPassword
   }
 }, Login)
