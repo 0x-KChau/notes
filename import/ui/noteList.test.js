@@ -1,42 +1,26 @@
-import {Meteor} from 'meteor/meteor'
-import React from 'react'
-import expect from 'expect'
-import {mount} from 'enzyme'
+import {Meteor} from 'meteor/meteor';
+import React from 'react';
+import expect from 'expect';
+import {mount} from 'enzyme';
 
-import {NoteList} from './noteList'
-
-const notes=[
-  {
-    _id: 'noteId1',
-    title: 'Test Title',
-    body: '',
-    updatedAt: 0,
-    userId: 'userId1'
-  },
-  {
-    _id: 'noteId2',
-    title: '',
-    body: 'body is here',
-    updatedAt: 0,
-    userId: 'userId2'
-  }
-]
+import {NoteList} from './noteList';
+import {notes} from '../fixtures/fixtures';
 
 if(Meteor.isClient){
   describe('NoteList', function(){
 
     it('should render notelistitem for each note', function(){
-      const wrapper = mount(<NoteList note={notes}/>)
+      const wrapper = mount(<NoteList notes={notes}/>)
 
       expect(wrapper.find('NoteListItem').length).toBe(2)
       expect(wrapper.find('NoteListEmptyItem').length).toBe(0)
     })
 
     it('should render NoteListEmptyItem if zero notes', function(){
-      const wrapper = mount(<NoteList note={[]}/>)
+      const wrapper = mount(<NoteList notes={[]}/>)
 
       expect(wrapper.find('NoteListItem').length).toBe(0)
-      expect(wrapper).find('NoteListEmptyItem').length.toBe(1)
+      expect(wrapper.find('NoteListEmptyItem').length).toBe(1)
     })
   })
 }
