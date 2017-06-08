@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker'
+import {Session} from 'meteor/session'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
@@ -13,6 +14,15 @@ import NotFound from '../ui/notFound'
 const unauthenticatedPage = ['/','/signup','/login'];
 const authenticatedPage = ['/dashboard'];
 
+const renderDashboard=({match})=>{
+  if(Meteor.userId()){
+    Session.set('selectedNoteId', match.params.id);
+    // console.log(match);
+    return <Dashboard/>
+  }else{
+    <Redirect to={"/login"}/>
+  }
+}
 
 export const authenticatedFunc = (isAuthenticated, history) =>{
   Tracker.autorun(()=>{
@@ -24,8 +34,8 @@ export const authenticatedFunc = (isAuthenticated, history) =>{
               <Route exact path="/" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/login" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/signup" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Signup/>)}/>
-              <Route path="/dashboard" render={()=>(Meteor.userId()?<Dashboard/>:<Redirect to={"/login"}/>)}/>
-              <Route path="/dashboard/:id" render={()=>(Meteor.userId()?<Dashboard/>:<Redirect to={"/login"}/>)}/>
+              {/* <Route path="/dashboard" render={()=>(Meteor.userId()?<Dashboard/>:<Redirect to={"/login"}/>)}/> */}
+              <Route path="/dashboard/:id" component={renderDashboard}/>
               <Route component={NotFound}/>
             </Switch>
           </div>
