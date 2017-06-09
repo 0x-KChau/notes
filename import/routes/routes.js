@@ -16,9 +16,11 @@ const authenticatedPage = ['/dashboard'];
 
 const renderDashboard=({match})=>{
   if(Meteor.userId()){
-    Session.set('selectedNoteId', match.params.id);
-    // console.log(match);
-    return <Dashboard/>
+    if(match.params.id){
+      Session.set('selectedNoteId', match.params.id);
+      console.log(match);
+      return <Dashboard/>
+    }else return <Dashboard/>
   }else{
     <Redirect to={"/login"}/>
   }
@@ -34,7 +36,7 @@ export const authenticatedFunc = (isAuthenticated, history) =>{
               <Route exact path="/" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/login" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Login/>)}/>
               <Route path="/signup" render={()=>(Meteor.userId()?<Redirect to={"/dashboard"}/>:<Signup/>)}/>
-              {/* <Route path="/dashboard" render={()=>(Meteor.userId()?<Dashboard/>:<Redirect to={"/login"}/>)}/> */}
+              <Route exact path="/dashboard" component={renderDashboard}/>
               <Route path="/dashboard/:id" component={renderDashboard}/>
               <Route component={NotFound}/>
             </Switch>
