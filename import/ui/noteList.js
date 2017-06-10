@@ -3,6 +3,7 @@ import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import {Session} from 'meteor/session'
+
 import {Notes} from '../api/notes'
 import NoteListHeader from './noteListHeader'
 import NoteListItem from './noteListItem'
@@ -33,7 +34,7 @@ export default createContainer(()=>{
   Meteor.subscribe('notes');
 
   return{
-    notes: Notes.find().fetch().map((note)=>{
+    notes: Notes.find({},{sort:{updatedAt:-1}}).fetch().map((note)=>{
       return{
         ...note,
         selected: note._id === selectedNoteId

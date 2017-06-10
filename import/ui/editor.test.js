@@ -59,7 +59,7 @@ if(Meteor.isClient){
     })
 
     it('should set state for new note', function(){
-      const wrapper = mount(<Editor call={call} selectedNoteId={notes[0]._id} note={notes[0]}/>)
+      const wrapper = mount(<Editor call={call} />)
 
       wrapper.setProps({
         selectedNoteId: notes[0]._id,
@@ -71,7 +71,7 @@ if(Meteor.isClient){
     })
 
     it('should not set state if note prop not provided', function(){
-      const wrapper = mount(<Editor call={call} selectedNoteId={notes[0]._id} note={notes[0]}/>)
+      const wrapper = mount(<Editor call={call}/>)
 
       wrapper.setProps({
         selectedNoteId: notes[0]._id,
