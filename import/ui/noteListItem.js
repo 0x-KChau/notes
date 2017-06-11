@@ -10,6 +10,7 @@ const NoteListItem = (props)=>{
   return(
     <div className={className} onClick={()=>{
       props.Session.set('selectedNoteId', props.note._id)
+      // props.Session.set('isNavOpen', false)
 
     }}>
       <h5 className="item__title">{props.note.title || "Untitled Note"}</h5>
@@ -19,8 +20,8 @@ const NoteListItem = (props)=>{
 }
 
 NoteListItem.PropTypes={
-  note:PropTypes.object,
-  Session:PropTypes.object
+  note:PropTypes.object.isRequired,
+  Session:PropTypes.object.isRequired
 }
 
 export default createContainer(()=>{
