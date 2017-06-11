@@ -23,8 +23,8 @@ export class NoteListHeader extends React.Component{
 
   render(){
     return(
-      <div>
-        <button onClick={this.onClick.bind(this)}>Create Note</button>
+      <div className="item-list__header">
+        <button className="button" onClick={this.onClick.bind(this)}>Create Note</button>
 
       </div>
     )
