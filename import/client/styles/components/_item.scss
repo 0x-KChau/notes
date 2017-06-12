@@ -3,6 +3,8 @@
   border: 1px solid $grey;
   width: 100%;
   overflow-y: scroll;
+  //scroll like mobile app
+  -webkit-overflow-scrolling: touch;
 }
 
 .item-list__header{

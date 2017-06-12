@@ -23,6 +23,8 @@
   outline: none;
   padding: $input-spacing;
   resize: none;
+  //scroll like mobile app
+  -webkit-overflow-scrolling: touch;
 }
 
 .editor__message{

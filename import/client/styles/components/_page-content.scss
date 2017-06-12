@@ -18,6 +18,8 @@
   top: $header-height;
   left: -100vw;
   bottom: 0;
+  //show always on top
+  z-index: 1;
 
   @include desktop{
     display: flex;
